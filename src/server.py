@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import socket
 from threading import Thread
 from threading import  Lock
