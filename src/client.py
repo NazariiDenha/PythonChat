@@ -4,6 +4,7 @@ import socket
 import argparse
 import tkinter
 from threading import Thread
+from tkinter import messagebox
 
 CHUNK = 1024
 
@@ -63,6 +64,7 @@ def send(event = None):
         global name
         msg = my_msg.get()
         if len(msg) == 0:
+            messagebox.showinfo("Message", "You can not send empty message")
             return
         if not name_setted:
             name_setted = True
@@ -71,7 +73,7 @@ def send(event = None):
 
             socksend(bytes(msg, "utf8"))
             return
-        print(name + " => " +  user_list.get(tkinter.ACTIVE) + ": " + msg)
+        print(name + " => " + user_list.get(tkinter.ACTIVE) + ": " + msg)
         my_msg.set("")
         socksend(bytes(name + " => " + user_list.get(tkinter.ACTIVE) + ": " + msg, "utf8"))
     except Exception as e:
