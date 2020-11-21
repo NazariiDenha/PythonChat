@@ -47,7 +47,7 @@ def receive():
             msg = sock.recv(CHUNK).decode("utf8")
             while len(msg) > 0:
                 pos = msg.find(";;")
-                message_handler(msg[:pos])
+                top.after(0, message_handler, msg[:pos])
                 msg = msg[pos + 2:]
         except OSError:
             break
