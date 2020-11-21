@@ -88,9 +88,9 @@ def on_closing(event = None):
 
 
 top = tkinter.Tk()
-top.geometry("800x600")
+#top.geometry("800x600")
 top.title("Chat")
-messages_frame = tkinter.Frame(top, height = 600, width = 500)
+messages_frame = tkinter.Frame(top)
 my_msg = tkinter.StringVar()
 
 history_frame = tkinter.Frame(messages_frame, height = 400)
@@ -111,7 +111,7 @@ send_button.pack()
 
 messages_frame.pack(side = tkinter.LEFT, anchor = "sw")
 
-user_frame = tkinter.Frame(top, height = 600, width = 300)
+user_frame = tkinter.Frame(top) 
 user_list = tkinter.Listbox(user_frame, height = 30, width = 54, selectmode = tkinter.SINGLE, exportselection = tkinter.FALSE)
 exit_button = tkinter.Button(user_frame, text = "Exit", command = on_closing, width = 47, height = 7)
 user_frame.pack(side = tkinter.RIGHT)
