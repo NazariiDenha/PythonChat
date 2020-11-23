@@ -5,20 +5,7 @@ from threading import Thread
 from threading import  Lock
 import argparse
 
-CHUNK = 1024
 
-HOST = ''
-PORT = 50007
-parser = argparse.ArgumentParser()
-parser.add_argument('--host', default=HOST)
-parser.add_argument('--port', type=int, default=PORT)
-args = parser.parse_args()
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind((args.host, args.port))
-
-clients = {}
-clients_lock = Lock()
 
 def sendall(msg, pref, dst = "ALL"):
     with clients_lock:
@@ -90,6 +77,22 @@ def accept_connections():
         Thread(target=client_handler, args = (conn, )).start()
 
 if __name__ == "__main__":
+    CHUNK = 1024
+
+    HOST = ''
+    PORT = 50007
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--host', default=HOST)
+    parser.add_argument('--port', type=int, default=PORT)
+    args = parser.parse_args()
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind((args.host, args.port))
+
+    clients = {}
+    clients_lock = Lock()
+
+
     sock.listen(5)
     print("Waiting for connections")
     accept_thread = Thread(target=accept_connections)
